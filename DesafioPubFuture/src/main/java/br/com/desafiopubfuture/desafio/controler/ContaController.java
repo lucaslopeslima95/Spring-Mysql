@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 import br.com.desafiopubfuture.desafio.model.Conta;
 import br.com.desafiopubfuture.desafio.model.Transferencia;
 import br.com.desafiopubfuture.desafio.repository.ContaRepository;
@@ -27,7 +27,7 @@ public class ContaController {
 	@Autowired
 	private ContaRepository contaRepository;
 
-	@GetMapping("/listartodos")
+	@GetMapping("/listar_todos")
 	public List<Conta> listar() {
 		return contaRepository.findAll();
 	}
@@ -51,14 +51,14 @@ public class ContaController {
 		return new ResponseEntity<Conta>(conta, HttpStatus.OK);
 	}
 
-	@GetMapping("/buscaporid")
+	@GetMapping("/busca_por_id")
 	@ResponseBody
 	public ResponseEntity<Conta> buscarContaId(@RequestParam(name = "id") int id) {
 		Conta conta = contaRepository.findById(id).get();
 		return new ResponseEntity<Conta>(conta, HttpStatus.OK);
 	}
 
-	@PostMapping("/transfereSaldo")
+	@PostMapping("/transfere_saldo")
 	@ResponseBody
 	public Transferencia transfereSaldo(@RequestBody Transferencia transferencia) {
 
@@ -72,6 +72,15 @@ public class ContaController {
 		atualizar(contaDestino);
 
 		return transferencia;
+	}
+	@GetMapping("/mostra_saldo_total")
+	public ResponseEntity<String> mostrasaldototal() {
+		double saldoTotal = 0;
+		for (int i = 1; i <= contaRepository.count(); i++) {
+		saldoTotal = contaRepository.getById(i).getSaldo()+saldoTotal;
+		
+		}
+		 return new ResponseEntity<String>("O Saldo Total é "+saldoTotal,HttpStatus.OK);
 	}
 
 }
