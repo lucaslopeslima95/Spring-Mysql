@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.desafiopubfuture.desafio.model.Receita;
 
 @Repository
-public interface ReceitasRepository extends JpaRepository<Receita,Long>{
+public interface ReceitasRepository extends JpaRepository<Receita,Integer>{
 
 }

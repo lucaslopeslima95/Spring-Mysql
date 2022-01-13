@@ -3,51 +3,23 @@ package br.com.desafiopubfuture.desafio.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
 
 @Entity
+@Data
 public class Despesa {
-	
-	private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private double valor;
 	private Date dataPagamento;
 	private Date dataPagamentoEsperado;
 	private String tipoDespesa;
 	private int conta;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public double getValor() {
-		return valor;
-	}
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-	public Date getDataPagamento() {
-		return dataPagamento;
-	}
-	public void setDataPagamento(Date dataPagamento) {
-		this.dataPagamento = dataPagamento;
-	}
-	public Date getDataPagamentoEsperado() {
-		return dataPagamentoEsperado;
-	}
-	public void setDataPagamentoEsperado(Date dataPagamentoEsperado) {
-		this.dataPagamentoEsperado = dataPagamentoEsperado;
-	}
-	public String getTipoDespesa() {
-		return tipoDespesa;
-	}
-	public void setTipoDespesa(String tipoDespesa) {
-		this.tipoDespesa = tipoDespesa;
-	}
-	public int getConta() {
-		return conta;
-	}
-	public void setConta(int conta) {
-		this.conta = conta;
-	}
+	
 }

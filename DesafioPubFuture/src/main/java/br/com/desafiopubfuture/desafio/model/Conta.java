@@ -1,59 +1,27 @@
 package br.com.desafiopubfuture.desafio.model;
 
-import java.util.Objects;
+
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
 
 @Entity
+@Data
 public class Conta {
 	
-	private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private int numeroConta;
+	private int agencia;
 	private double saldo;
 	private String  tipoConta;
 	private String instituicaoFinanceira;
-	public double getSaldo() {
-		return saldo;
-	}
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-	public String getTipoConta() {
-		return tipoConta;
-	}
-	public void setTipoConta(String tipoConta) {
-		this.tipoConta = tipoConta;
-	}
-	public String getInstituicaoFinanceira() {
-		return instituicaoFinanceira;
-	}
-	public void setInstituicaoFinanceira(String instituicaoFinanceira) {
-		this.instituicaoFinanceira = instituicaoFinanceira;
-	}
 	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(instituicaoFinanceira, saldo, tipoConta);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Conta other = (Conta) obj;
-		return Objects.equals(instituicaoFinanceira, other.instituicaoFinanceira)
-				&& Double.doubleToLongBits(saldo) == Double.doubleToLongBits(other.saldo)
-				&& Objects.equals(tipoConta, other.tipoConta);
-	}
-	
+
 
 }
