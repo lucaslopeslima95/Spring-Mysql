@@ -1,4 +1,4 @@
-package br.com.desafiopubfuture.desafio.controler;
+package br.com.desafiopubfuture.desafio.controller;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,44 +22,54 @@ import br.com.desafiopubfuture.desafio.model.Transferencia;
 import br.com.desafiopubfuture.desafio.repository.ContaRepository;
 
 @RestController
-@RequestMapping("/conta")
+@RequestMapping(value ="/conta",produces = "application/json", 
+method = {RequestMethod.GET, RequestMethod.PUT})
 public class ContaController {
 
 	@Autowired
 	private ContaRepository contaRepository;
 
-	@GetMapping("/listar_todos")
-	public List<Conta> listar() {
-		return contaRepository.findAll();
-	}
-
-	@PostMapping("/salvar")
+	@PostMapping(value ="/adicionar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Conta adicionar(@RequestBody Conta conta) {
-		return contaRepository.save(conta);
+	public ResponseEntity<Conta> adicionar(@RequestBody Conta conta) {
+		contaRepository.save(conta);
+		return new ResponseEntity<Conta>(conta, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/deletar")
-	public ResponseEntity<String> deletar(@RequestParam int id) {
-		contaRepository.deleteById(id);
-		return new ResponseEntity<String>("Conta Deletada Com Sucesso", HttpStatus.OK);
-	}
-
-	@PutMapping("/atualizar")
+	@PutMapping(value ="/atualizar")
 	@ResponseBody
 	public ResponseEntity<Conta> atualizar(@RequestBody Conta conta) {
 		contaRepository.saveAndFlush(conta);
 		return new ResponseEntity<Conta>(conta, HttpStatus.OK);
 	}
 
-	@GetMapping("/busca_por_id")
+	@GetMapping(value ="/busca_por_id")
 	@ResponseBody
 	public ResponseEntity<Conta> buscarContaId(@RequestParam(name = "id") int id) {
 		Conta conta = contaRepository.findById(id).get();
 		return new ResponseEntity<Conta>(conta, HttpStatus.OK);
 	}
 
-	@PostMapping("/transfere_saldo")
+	@DeleteMapping(value ="/deletar")
+	public ResponseEntity<String> deletar(@RequestParam int id) {
+		contaRepository.deleteById(id);
+		return new ResponseEntity<String>("Conta Deletada Com Sucesso", HttpStatus.OK);
+	}
+
+	@GetMapping(value ="/listar_todos")
+	public List<Conta> listar() {
+		return contaRepository.findAll();
+	}
+
+	@GetMapping(value ="/mostra_saldo_total")
+	public ResponseEntity<String> mostrasaldototal() {
+		double saldoTotal = 0;
+		for (int i = 1; i <= contaRepository.count(); i++) {
+		saldoTotal = contaRepository.getById(i).getSaldo()+saldoTotal;
+		}
+		 return new ResponseEntity<String>("O Saldo Total é "+saldoTotal,HttpStatus.OK);
+	}
+	@PostMapping(value ="/transfere_saldo")
 	@ResponseBody
 	public Transferencia transfereSaldo(@RequestBody Transferencia transferencia) {
 
@@ -72,15 +83,6 @@ public class ContaController {
 		atualizar(contaDestino);
 
 		return transferencia;
-	}
-	@GetMapping("/mostra_saldo_total")
-	public ResponseEntity<String> mostrasaldototal() {
-		double saldoTotal = 0;
-		for (int i = 1; i <= contaRepository.count(); i++) {
-		saldoTotal = contaRepository.getById(i).getSaldo()+saldoTotal;
-		
-		}
-		 return new ResponseEntity<String>("O Saldo Total é "+saldoTotal,HttpStatus.OK);
 	}
 
 }
