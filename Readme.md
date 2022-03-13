@@ -3,8 +3,7 @@
 
 # Sobre o projeto
 
-A aplicação desenvolvida para esse teste consiste em apresentar os conhecimentos em java backend, a modelagem do sistema foi feita a partir dos requisitos solicitados e pode ser encontrados no  (https://www.proway.com.br/desafiopubfuture "Site Do Desafio Pub Future").
-
+A aplicação desenvolvida para esse teste consiste em apresentar os conhecimentos em java backend ultilizando pacote spring boot e dados persistidos em mysql.
 A aplicação consiste em um auxiliar para o controle de finanças pessoais,incluindo despesas, receitas e contas bancarias que podem cadastradas.
 
 ## Modelo conceitual
@@ -18,9 +17,6 @@ A aplicação consiste em um auxiliar para o controle de finanças pessoais,incl
 - Maven
 - Lombok
 - JDBC
-## Front end(Futuramente será desenvolvido)
-- HTML / CSS / JS / JavaScript
-
 # Como executar o projeto
 
 ## Back end
