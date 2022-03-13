@@ -7,7 +7,7 @@ A aplicação desenvolvida para esse teste consiste em apresentar os conheciment
 A aplicação consiste em um auxiliar para o controle de finanças pessoais,incluindo despesas, receitas e contas bancarias que podem cadastradas.
 
 ## Modelo conceitual
-![Modelo Conceitual](https://github.com/lucaslopeslima95/DesafioPubFuture/blob/master/Assets/modelorelacionaldesafio.png)
+![Modelo Conceitual](https://github.com/lucaslopeslima95/Spring-Mysql/blob/master/Assets/modelorelacionaldesafio.png)
 
 # Tecnologias utilizadas
 ## Back end
@@ -22,9 +22,7 @@ A aplicação consiste em um auxiliar para o controle de finanças pessoais,incl
 ## Back end
 Pré-requisitos: Java 11,Ide para desenvolvimento java com meaven, mysql e postman, instalados na maquina.
 Passos para teste.
-1 Acessando o link https://github.com/lucaslopeslima95/DesafioPubFuture.
-2 Clique em code, download zip.
-3 Extraia o conteudo.
+1 git clone https://github.com/lucaslopeslima95/Spring-Mysql.
 4 Na sua IDE e importe o projeto maeven.
 5 Rode o projeto executando-o.
 6 Para os testes no post ultilize localhost:8080/classe que deseja testar/metodo a ser testado.
